@@ -31,6 +31,7 @@ def get_urls(wnid):
     return url_list
 
 def store_urls(urlset, foldername, term='img'):
+    original_path = os.getcwd()
     if not os.path.isdir(foldername):
         os.mkdir(foldername)
     
@@ -54,6 +55,8 @@ def store_urls(urlset, foldername, term='img'):
             print('Empty img =>', url)
             break
     print(len(os.listdir('.')), 'images succesfully stored in ', foldername)
+    
+    os.chdir(original_path)
 
 
 search_term = 'dog'
