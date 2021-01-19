@@ -6,6 +6,7 @@ import numpy as np
 import os
 import urllib
 import re
+import sys
 
 nltk.download('wordnet')
 
@@ -55,23 +56,27 @@ def store_urls(urlset, foldername, term='img'):
             print('Empty img =>', url)
             break
     print(len(os.listdir('.')), 'images succesfully stored in ', foldername)
-    
+
     os.chdir(original_path)
 
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print('No search term was provided.')
+    else: 
+        search_term = sys.argv[1]
 
-search_term = 'dog'
-wnid = get_wnid(search_term)
-print("wnid for given term: ", search_term, " => ", wnid)
+        wnid = get_wnid(search_term)
+        print("wnid for given term: ", search_term, " => ", wnid)
 
-urls = np.array(get_urls(wnid))
-np.random.shuffle(urls)
+        urls = np.array(get_urls(wnid))
+        np.random.shuffle(urls)
 
-test_size = int(np.floor(len(urls) * 0.2))
-test = urls[:test_size]
-train = urls[test_size:]
+        test_size = int(np.floor(len(urls) * 0.2))
+        test = urls[:test_size]
+        train = urls[test_size:]
 
-print("Storing training set with => ", len(train), " images")
-print("Storing training set with => ", len(test), " images")
+        print("Storing training set with => ", len(train), " images")
+        print("Storing training set with => ", len(test), " images")
 
-store_urls(urlset = test, foldername = './test', term = search_term)
-store_urls(urlset = train, foldername = './train', term = search_term)
+        store_urls(urlset = test, foldername = './test', term = search_term)
+        store_urls(urlset = train, foldername = './train', term = search_term)
