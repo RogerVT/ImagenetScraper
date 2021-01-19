@@ -1,8 +1,16 @@
-# Actividad Integradora2
+# ImageNet Scrapper
 
-Webscraper for ImageNet database scraping. 
+Webscrapperr to download images from ImageNet given a search term.
 
-##Coevaluación
+## Usage
+
+```
+Usage: python imagenet_scapper.py [TERM]
+```
+
+20% of images will be downloaded to `./test`, and the rest to `./train` (Relative to the directory of execution).
+
+## Coevaluación
 
 | Nombre                            | Auto | E1 | E2 | E3 | E4 |
 |-----------------------------------|------|----|----|----|----|
